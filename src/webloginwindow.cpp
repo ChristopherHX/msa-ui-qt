@@ -26,6 +26,7 @@ WebLoginWindow::WebLoginWindow(QUrl url, QWidget *parent) : QDialog(parent) {
     stacked->addWidget(loadingIndicatorCtr);
 
     webView = new QWebEngineView(this);
+    webView->setPage(new WebPage(this));
     stacked->addWidget(webView);
     setupWebBrowser();
     webView->setUrl(url);

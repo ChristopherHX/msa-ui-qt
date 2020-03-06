@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QMap>
+#include <QWebEnginePage>
+#include <QWebEngineCertificateError>
 
 class QStackedLayout;
 class QNetworkCookie;
@@ -49,6 +51,16 @@ public slots:
 
     void onFinalBack() { window->onFinalBack(); }
 
+};
+
+class WebPage : public QWebEnginePage {
+    Q_OBJECT
+public:
+    explicit WebPage(QWidget * wid) : QWebEnginePage(wid) {}
+protected:
+    bool certificateError(const QWebEngineCertificateError& err) {
+        return err.isOverridable();
+    }
 };
 
 #endif // LOGINWINDOW_H
